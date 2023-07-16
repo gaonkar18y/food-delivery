@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { FixedSizeList as List } from 'react-window';
+import { RootState } from '../store/store';
+import {  loadProducts } from '../store/products/actions';
 
 const heightPerRow= 20;
 
 const Proucts = ()=>{
-    const [rows, setRows] = useState();
+    const dispatch = useDispatch();
+    const rows = useSelector((state: RootState)=> state.products.products);
 
-    const loadData = async ()=>{
-        const data = await axios.get("http://localhost:3001/product/all");
-        setRows(data.data);
-    }
     useEffect(()=>{
-        loadData()
-    },[])
-
-
+        if(rows.length === 0){
+            dispatch(loadProducts())
+        }
+    },[rows])
+    
     if(!rows){
         return <div>loading</div>
     }

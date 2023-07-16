@@ -1,19 +1,23 @@
-import client from './db';
+import PgHelper from './db';
 
-export const addProucts= async (): Promise<any>=>{
-    for(let i=2;i<1000000;i++){
-        const name=`product no ${i}`;
-        const desc=`product no ${i} is good`;
-        const price=2*i;
-        const queryStr = `insert into products (category_id,name,description,price) values (1,'${name}','${desc}',${price});`;
-        client.query(queryStr);
-    }
+import { ProductRequest } from '../models'
 
-    return [];
+export const addProuct= async (product: ProductRequest): Promise<any>=>{
+    const { categoryId, name, description, price } = product;
+    const queryStr = `insert into products (category_id,name,description,price) values (${categoryId},'${name}','${description}',${price});`;
+    const res = await PgHelper.getClient().query(queryStr);
+    return res;
 }
 
 export const getAllProducts = async ()=> {
     const queryStr = 'select * from products limit 20000;';
-    const res = await client.query(queryStr);
+    const res = await PgHelper.getClient().query(queryStr);
     return res.rows;
 }
+
+export const getProduct = async (id: number)=> {
+    const queryStr = `select * from products where id=${id};`;
+    const res = await PgHelper.getClient().query(queryStr);
+    return res.rows;
+}
+

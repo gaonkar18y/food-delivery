@@ -33,6 +33,8 @@ CREATE TABLE user_address
     constraint address_id_fk FOREIGN KEY (address_id) references addresses(id)
 );
 
+create schema usermanagementservice AUTHORIZATION usermanagementservice;
+
 CREATE USER usermanagementservice WITH PASSWORD 'test123';
 
 GRANT ALL ON ALL TABLES IN SCHEMA usermanagementservice TO usermanagementservice;
