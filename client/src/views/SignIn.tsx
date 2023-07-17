@@ -12,8 +12,8 @@ const SignIn: React.FC<{}> = ()=>{
     }
 
     return <div>
-        <input type="text" placeholder="enter email"/>
-        <input type="password" placeholder="enter password"/>
+        <input data-testid="signin-email-input" type="text" placeholder="enter email"/>
+        <input data-testid="signin-pass-input" type="password" placeholder="enter password"/>
         <button onClick={handleOnClick}>Sign in</button>
     </div>
 }

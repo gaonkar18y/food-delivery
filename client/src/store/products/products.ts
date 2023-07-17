@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { loadProducts } from './actions';
-
-interface Product{
-    name: string;
-    description: string;
-    price: number;
-}
+import { Product } from '../../models/product';
 
 export interface ProductState {
     products: Product[]
