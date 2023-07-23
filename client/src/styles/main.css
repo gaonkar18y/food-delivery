@@ -19,10 +19,6 @@
     padding: 0;
     overflow-y: scroll;
     position: "relative"
-  }
-
-.list-row{
-    background: lightblue;
 }
 
 body{

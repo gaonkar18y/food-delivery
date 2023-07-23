@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { addProuct, getAllProducts, getProduct } from '../services/products';
+import { addProuct, getAllCategories, getAllProducts, getProduct } from '../services/products';
 import { ProductRequest } from '../models';
 
 const router = Router();
@@ -35,6 +35,11 @@ router.get('/all', async (req, res, next)=>{
         res.status(500).send("Error in fetching products, please try after some time")
     }
    
+});
+
+router.get('/categories', async (req, res, next)=>{
+    const list = await getAllCategories();
+    res.send(list);
 });
 
 router.get('/:id', async (req, res, next)=>{

@@ -1,6 +1,6 @@
 import PgHelper from './db';
 
-import { ProductRequest } from '../models'
+import { Product, ProductCategory, ProductRequest } from '../models'
 
 export const addProuct= async (product: ProductRequest): Promise<boolean>=>{
     try{
@@ -19,10 +19,21 @@ export const addProuct= async (product: ProductRequest): Promise<boolean>=>{
     }
 }
 
-export const getAllProducts = async ()=> {
+export const getAllProducts = async (): Promise<Product[]>=> {
     const queryStr = 'select * from products limit 20000;';
     const res = await PgHelper.getClient().query(queryStr);
-    return res.rows;
+    const list: Product[] = [];
+    for(let p of res.rows){
+       list.push({
+        name: p.name,
+        description: p.description,
+        imageUrl: p.imageurl,
+        id: p.id,
+        categoryId: p.categoryid,
+        price: p.price
+       })
+    }
+    return list;
 }
 
 export const getProduct = async (id: number)=> {
@@ -30,4 +41,26 @@ export const getProduct = async (id: number)=> {
     const res = await PgHelper.getClient().query(queryStr);
     return res.rows;
 }
+
+
+export const getAllCategories = async (): Promise<ProductCategory[]>=> {
+    const list: ProductCategory[] = [];
+    try{
+        const queryStr = 'select * from product_category;';
+        const res = await PgHelper.getClient().query(queryStr);
+        for(let p of res.rows){
+           list.push({
+            name: p.name,
+            description: p.description,
+            id: p.id
+           })
+        }
+        return list;
+    }catch(err){
+        console.log(err);  
+    }finally{
+        return list;
+    }
+}
+
 

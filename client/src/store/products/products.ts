@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { loadProducts } from './actions';
-import { Product } from '../../models/product';
+import { loadProductCategories, loadProducts } from './actions';
+import { Product, ProductCategory } from '../../models/product';
 
 export interface ProductState {
-    products: Product[]
+    products: Product[],
+    productCategories: ProductCategory[]
 }
 
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        products:[]
+        products:[],
+        productCategories:[]
     },
     reducers: {
         addProducts: (state, action)=>{
@@ -20,7 +22,11 @@ const productsSlice = createSlice({
     extraReducers: (builder)=>{
         builder.addCase(loadProducts.fulfilled, (state, action)=>{
             state.products = action.payload;
-        })
+        });
+
+        builder.addCase(loadProductCategories.fulfilled,(state, action)=>{
+            state.productCategories = action.payload;
+        });
     }
 });
 

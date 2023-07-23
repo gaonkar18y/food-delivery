@@ -9,3 +9,10 @@ export interface ProductRequest{
 export interface Product extends ProductRequest{
    id: number;
 }
+
+
+export interface ProductCategory{
+    name: string;
+    description: string;
+    id: number;
+}
