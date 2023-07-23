@@ -6,9 +6,24 @@ import { ProductRequest } from '../models';
 const router = Router();
 
 router.post('/',async (req, res, next)=>{
-    const product: ProductRequest = req.body;
-    const data = await addProuct(product);
-    res.send({ data })
+    const { categoryId, name, description, price } = req.body;
+    let imageUrl = req.file?.filename;
+    if(!imageUrl){
+        res.status(400).send({message: "Product image is required."})
+        return;
+    }
+    const basePath = `${req.protocol}://${req.get("host")}/public/`;
+    imageUrl= basePath+imageUrl;
+    const product: ProductRequest = {
+        categoryId: parseInt(categoryId), name, description, price: parseInt(price), imageUrl
+    };
+    const result = await addProuct(product);
+    if(result){
+        res.send({ message: "product created successfully" })
+    }else{
+        res.send({ message: "Did not create product" })
+    }
+    
 })
 
 router.get('/all', async (req, res, next)=>{

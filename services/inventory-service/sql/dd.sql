@@ -13,6 +13,7 @@ CREATE TABLE products
     name varchar(200) not null,
     description text,
     price integer not null,
+    imageUrl varchar(1000),
     constraint category_id_fk FOREIGN KEY (category_id) REFERENCES product_category(id)
 );
 
