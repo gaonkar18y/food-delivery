@@ -7,7 +7,7 @@ import { RootState } from '../store/store';
 import {  loadProducts } from '../store/products/actions';
 import ProductCard from './product/ProductCard';
 import Box from '@mui/material/Box';
-import AddProduct from './product/AddProductForm';
+
 import IconButton from '@mui/material/IconButton';
 
 const Proucts = ()=>{
@@ -66,8 +66,6 @@ const Proucts = ()=>{
                         <NavigateBeforeIcon />
                 </IconButton>
             </Box>
-            <br/>
-            <center><AddProduct /></center> 
         </>
         
     )

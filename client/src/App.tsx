@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 
 import { About } from './views/About';
 import { Home } from './views/Home';
-import Products from './views/Products';
 import Header from './views/header/Header';
 import SignIn from './views/SignIn';
+import AddProduct from './views/product/AddProductForm';
 
 import store from './store/store';
 
@@ -21,8 +21,8 @@ const App: React.FC<{}> = ()=>{
         <div id="app-body">
         <Routes>
             <Route path="/about" element={<About/>}></Route>
-            <Route path="/products" element={<Products />}></Route>
             <Route path="/signin" element={<SignIn/>} />
+            <Route path="/add-product" element={<AddProduct/>} />
             <Route path="/" element={<Home/>}></Route>
         </Routes>
         </div>

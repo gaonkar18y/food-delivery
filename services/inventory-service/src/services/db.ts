@@ -1,10 +1,10 @@
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 
 class PgHelper {
     private static instance: PgHelper;
-    client;
+    pool;
     private constructor(){
-        this.client = new Pool({
+        this.pool = new Pool({
             host: process.env.DB_HOST,
             database: process.env.DB_NAME,
             port: parseInt(process.env.DB_PORT || "5432"),
@@ -12,23 +12,17 @@ class PgHelper {
             password: process.env.DB_PASS
         });
 
-
-        this.client.connect();
-
-        this.client.on("error",()=>{
+        this.pool.on("error",()=>{
             console.log("error in connecting to client")
         })
     }
 
-    static getClient(){
-        if(!this.instance.client){
+    static getClient(): Promise<PoolClient>{
+        if(!this.instance.pool){
             throw new Error("cannot get client before init");
         }
 
-        if(!this.instance.client){
-            throw new Error("client is not connected");
-        }
-        return this.instance.client;
+        return this.instance.pool.connect();
     }
 
     static init(){
