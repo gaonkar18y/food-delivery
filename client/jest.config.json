@@ -1,5 +1,13 @@
 {
     "verbose": true,
     "testEnvironment":"jsdom",
-    "coveragePathIgnorePatterns": ["__utils__"]
+    "coveragePathIgnorePatterns": ["__utils__"],
+    "coverageThreshold":{
+        "global":{
+            "branches": 90,
+            "statements": 90,
+            "functions": 90,
+            "lines": 90
+        }
+    }
 }
