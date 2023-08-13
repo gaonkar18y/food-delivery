@@ -13,10 +13,11 @@ const AddProduct = ()=>{
     const [price, setPrice] = useState(0);
     const [file, setFile] = useState();
     const categories = useSelector((state: RootState)=> state.products.productCategories);
+    const isLoadedCategories = useSelector((state: RootState)=> state.products.isLoadedCategories);
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        if(categories.length === 0){
+        if(isLoadedCategories === false){
             dispatch(loadProductCategories())
         }
     },[categories]);

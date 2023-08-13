@@ -13,10 +13,11 @@ import IconButton from '@mui/material/IconButton';
 const Proucts = ()=>{
     const dispatch = useDispatch();
     const rows = useSelector((state: RootState)=> state.products.products);
+    const isLoaded = useSelector((state: RootState)=> state.products.isLoaded);
     const ref = useRef();
 
     useEffect(()=>{
-        if(rows.length === 0){
+        if(!isLoaded){
             dispatch(loadProducts())
         }
     },[rows])

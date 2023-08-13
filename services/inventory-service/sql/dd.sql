@@ -1,3 +1,6 @@
+
+/*CREATE USER inventoryservice WITH PASSWORD 'test123';*/
+
 CREATE TABLE product_category
 (
     id serial primary key,
@@ -20,8 +23,3 @@ CREATE TABLE products
 
 insert into product_category(name,description) values('non veg','These non veg foods');
 insert into product_category(name,description) values('fast food','These are china fast food');
-
-CREATE USER inventoryservice WITH PASSWORD 'test123';
-create schema inventoryservice AUTHORIZATION inventoryservice;
-GRANT ALL ON ALL TABLES IN SCHEMA inventoryservice TO inventoryservice;
-GRANT ALL ON ALL SEQUENCES IN SCHEMA inventoryservice TO inventoryservice;
