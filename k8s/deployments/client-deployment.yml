@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-delivery-ui
+  labels:
+    app: food-delivery
+    kind: front-end
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: food-delivery
+      kind: front-end
+  template:
+    metadata:
+        name: food-delivery-client
+        labels:
+          app: food-delivery
+          kind: front-end
+    spec:
+      imagePullSecrets:
+        - name: acr-auth
+      containers:
+        - image: yogeshgaonkar.azurecr.io/food-delivery-ui:1.0.0
+          name: food-delivery-ui
+          ports:
+            - containerPort: 80
+      
+    
