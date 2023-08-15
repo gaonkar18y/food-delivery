@@ -2,8 +2,8 @@ import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
 import { config } from 'dotenv';
-import multer, {diskStorage} from 'multer';
-import { v4 } from 'uuid';
+import multer, {memoryStorage} from 'multer';
+
 
 import PgHelper from './services/db'
 import productsRouter from './routes/products';
@@ -17,13 +17,7 @@ app.use(json());
 app.use(urlencoded());
 
 const mul = multer({
-    storage: diskStorage({
-        destination:(req,file, cb)=> cb(null, 'public'),
-        filename(req, file, cb) {
-            let name = `${v4()}-${Date.now()}.${file.mimetype.split('/')[1]}`
-            cb(null, name);
-        },
-    })
+    storage: memoryStorage()
 })
 
 app.use('/public', express.static('public'));
