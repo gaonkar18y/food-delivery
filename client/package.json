@@ -11,6 +11,8 @@
   "author": "Yogesh Gaonkar",
   "license": "ISC",
   "dependencies": {
+    "@azure/msal-browser": "^3.0.2",
+    "@azure/msal-react": "^2.0.2",
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",

@@ -1,20 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
-import { login } from '../store/auth/auth';
+import { useMsal } from '@azure/msal-react';
 
 const SignIn: React.FC<{}> = ()=>{
 
-    const dispatch = useDispatch();
+    const { instance } = useMsal();
 
-    const handleOnClick = ()=>{
-        dispatch(login({firstName: "Yogesh", lastName: "Gaonkar", email:"test@gmail.com"}));
-    }
+    const initializeSignIn = () => {
+      instance.loginRedirect();
+    };
 
     return <div>
-        <input data-testid="signin-email-input" type="text" placeholder="enter email"/>
-        <input data-testid="signin-pass-input" type="password" placeholder="enter password"/>
-        <button onClick={handleOnClick}>Sign in</button>
+        <button onClick={initializeSignIn}>Sign in</button>
     </div>
 }
 

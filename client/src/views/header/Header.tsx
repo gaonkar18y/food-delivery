@@ -14,12 +14,6 @@ const Header = ()=>{
             <Link to="/about" className="app-header-list-link">About</Link>
             <Link to="/add-product" className="app-header-list-link">Add Product</Link>
         </div>
-        {
-            auth.isLoggedIn ? <div>Welcome {auth.user.firstName}</div>:<div id="app-header-signup-section">
-                <Link to="/signup" className="app-header-list-link">Sign up</Link>
-                <Link to="/signin" className="app-header-list-link">Sign In</Link>
-            </div>
-        }
     </div>)
 }
 
