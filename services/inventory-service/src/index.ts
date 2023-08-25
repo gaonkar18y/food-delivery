@@ -7,8 +7,11 @@ import multer, {memoryStorage} from 'multer';
 
 import PgHelper from './services/db'
 import productsRouter from './routes/products';
+import { initServices } from './di/initServices';
 
 config();
+
+initServices();
 
 const app = express();
 app.use(cors());

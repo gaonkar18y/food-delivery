@@ -41,7 +41,7 @@ const AddProduct = ()=>{
     return (<Box
     component="form"
     sx={{
-     display: 'flex', flexDirection:'column', width: 400, height:400, justifyContent:'space-between'
+     display: 'flex', margin: 10, flexDirection:'column', width: 400, height:400, justifyContent:'space-between'
     }}
     noValidate
     autoComplete="off"

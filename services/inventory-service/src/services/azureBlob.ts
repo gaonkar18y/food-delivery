@@ -23,7 +23,7 @@ const getFilename = (file: Express.Multer.File) =>`${v4()}-${Date.now()}.${file.
 export const uploadFileToAzure = async (file: Express.Multer.File): Promise<string | undefined>=>{
     try{
         const blobName = getFilename(file);
-        const blobService = new BlockBlobClient(process.env.AZURE_STORAGE_CONNECTION_STRING as string,"productimages",blobName);
+        const blobService = new BlockBlobClient(process.env.AZURE_STORAGE_CONNECTION_STRING as string, process.env.PRODUCT_IMAGES_CONTAINER as string, blobName);
         const stream = bufferToStream(file.buffer);
         const streamLength = file.buffer.length;
         await blobService.uploadStream(stream, streamLength);

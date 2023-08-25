@@ -2,16 +2,22 @@ import PgHelper from './db';
 
 import { Product, ProductCategory, ProductRequest } from '../models'
 import { PoolClient } from 'pg';
+import { getKafkaProducer } from '../di/getServices';
 
 export const addProuct= async (product: ProductRequest): Promise<boolean>=>{
     let client: PoolClient|undefined;
     try{
         const { categoryId, name, description, price, imageUrl } = product;
         const values = [categoryId, name, description, price, imageUrl];
-        const queryStr = `insert into products (category_id,name,description,price,imageUrl) values ($1,$2,$3,$4,$5);`;
+        const queryStr = `insert into products (category_id,name,description,price,imageUrl) values ($1,$2,$3,$4,$5)  RETURNING id;`;
         client = await PgHelper.getClient();
         const res = await client.query(queryStr,values);
         if(res.rowCount === 1){
+            const id = res.rows[0].id;
+            getKafkaProducer().sendMessages("test",[{
+                key: id,
+                value: JSON.stringify(product)
+            }]);
             return true;
         }else{
             return false;
